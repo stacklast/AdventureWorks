@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AdventureWorks.Domain\AdventureWorks.Domain.csproj" />
+    <ProjectReference Include="..\AdventureWorks.Shared\AdventureWorks.Shared.csproj" />
   </ItemGroup>
 
 </Project>
