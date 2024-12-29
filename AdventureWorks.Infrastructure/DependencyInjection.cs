@@ -1,4 +1,6 @@
-﻿using AdventureWorks.Infrastructure.Persistence.DbContexts;
+﻿using AdventureWorks.Application.Abstractions.Data;
+using AdventureWorks.Infrastructure.Persistence;
+using AdventureWorks.Infrastructure.Persistence.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,8 +16,13 @@ public static class DependencyInjection
         string connectionString = configuration.GetConnectionString("Database") ??
                                   throw new ArgumentNullException(nameof(configuration));
 
+        services.AddSingleton<IDbConnectionFactory>(_ =>
+            new DbConnectionFactory(connectionString));
+
+
         services.AddDbContext<AdventureWorks2022Context>(options =>
             options.UseSqlServer(connectionString));
+
 
         return services;
     }
