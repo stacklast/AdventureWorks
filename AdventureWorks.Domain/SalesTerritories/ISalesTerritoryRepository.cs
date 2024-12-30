@@ -10,4 +10,6 @@ public interface ISalesTerritoryRepository
     void Update(SalesTerritory salesTerritory);
 
     void Delete(Guid id);
+
+    void AddHistory(SalesTerritoryHistory salesTerritoryHistory);
 }

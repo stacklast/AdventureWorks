@@ -6,7 +6,7 @@ using AdventureWorks.Shared;
 
 namespace AdventureWorks.Application.SalesTerritories.Create;
 internal sealed class CreateSalesTerritoryCommandHandler
-    : ICommandHandler<CreateSalesTerritoryCommand, Guid>
+    : SalesTerritoryCommandHandlerBase, ICommandHandler<CreateSalesTerritoryCommand, Guid>
 {
     private readonly ISalesTerritoryRepository _salesTerritoryRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -19,7 +19,9 @@ internal sealed class CreateSalesTerritoryCommandHandler
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Result<Guid>> Handle(CreateSalesTerritoryCommand request, CancellationToken cancellationToken)
+    public async Task<Result<Guid>> Handle(
+        CreateSalesTerritoryCommand request,
+        CancellationToken cancellationToken)
     {
 
         var salesTerritory = new SalesTerritory
@@ -35,7 +37,9 @@ internal sealed class CreateSalesTerritoryCommandHandler
 
         _salesTerritoryRepository.Add(salesTerritory);
 
-        await _unitOfWork.SaveChangesAsync();
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        await InsertSalesTerritoryHistory(salesTerritory, _salesTerritoryRepository, _unitOfWork, cancellationToken);
 
         return Result.Success(salesTerritory.Rowguid);
     }

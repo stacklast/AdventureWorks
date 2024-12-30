@@ -31,4 +31,8 @@ internal sealed class SalesTerritoryRepository(AdventureWorks2022Context dbConte
         return dbContext.SalesTerritories.FirstOrDefaultAsync(u => u.Rowguid == rowguid, cancellationToken);
     }
 
+    public void AddHistory(SalesTerritoryHistory salesTerritoryHistory)
+    {
+        dbContext.Add(salesTerritoryHistory);
+    }
 }
