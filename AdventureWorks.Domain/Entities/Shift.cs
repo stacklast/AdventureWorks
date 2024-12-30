@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace AdventureWorks.Domain.Entities;
+﻿namespace AdventureWorks.Domain.Entities;
 
 /// <summary>
 /// Work shift lookup table.
@@ -11,7 +8,7 @@ public partial class Shift
     /// <summary>
     /// Primary key for Shift records.
     /// </summary>
-    public byte ShiftId { get; set; }
+    public int ShiftId { get; set; }
 
     /// <summary>
     /// Shift description.

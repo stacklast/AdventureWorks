@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace AdventureWorks.Domain.Entities;
+﻿namespace AdventureWorks.Domain.Entities;
 
 /// <summary>
 /// Current version number of the AdventureWorks 2016 sample database. 
@@ -11,7 +8,7 @@ public partial class AwbuildVersion
     /// <summary>
     /// Primary key for AWBuildVersion records.
     /// </summary>
-    public byte SystemInformationId { get; set; }
+    public int SystemInformationId { get; set; }
 
     /// <summary>
     /// Version number of the database in 9.yy.mm.dd.00 format.

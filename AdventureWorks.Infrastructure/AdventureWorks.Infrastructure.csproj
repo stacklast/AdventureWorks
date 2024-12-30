@@ -22,4 +22,8 @@
     <ProjectReference Include="..\AdventureWorks.Application\AdventureWorks.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Persistence\Configurations\" />
+  </ItemGroup>
+
 </Project>

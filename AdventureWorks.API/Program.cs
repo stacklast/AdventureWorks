@@ -1,3 +1,4 @@
+using AdventureWorks.API.Extensions;
 using AdventureWorks.Application;
 using AdventureWorks.Infrastructure;
 
@@ -20,6 +21,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    app.ApplyMigrations();
 }
 
 app.UseHttpsRedirection();

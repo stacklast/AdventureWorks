@@ -280,6 +280,7 @@ public partial class AdventureWorks2022Context : DbContext, IUnitOfWork
 
             entity.Property(e => e.SystemInformationId)
                 .ValueGeneratedOnAdd()
+                .HasColumnType("TINYINT")
                 .HasComment("Primary key for AWBuildVersion records.")
                 .HasColumnName("SystemInformationID");
             entity.Property(e => e.DatabaseVersion)
@@ -2275,6 +2276,7 @@ public partial class AdventureWorks2022Context : DbContext, IUnitOfWork
             entity.HasIndex(e => new { e.StartTime, e.EndTime }, "AK_Shift_StartTime_EndTime").IsUnique();
 
             entity.Property(e => e.ShiftId)
+                .HasColumnType("TINYINT")
                 .ValueGeneratedOnAdd()
                 .HasComment("Primary key for Shift records.")
                 .HasColumnName("ShiftID");

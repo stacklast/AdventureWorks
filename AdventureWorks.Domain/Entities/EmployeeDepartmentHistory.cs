@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace AdventureWorks.Domain.Entities;
+﻿namespace AdventureWorks.Domain.Entities;
 
 /// <summary>
 /// Employee department transfers.
@@ -21,7 +18,7 @@ public partial class EmployeeDepartmentHistory
     /// <summary>
     /// Identifies which 8-hour shift the employee works. Foreign key to Shift.Shift.ID.
     /// </summary>
-    public byte ShiftId { get; set; }
+    public int ShiftId { get; set; }
 
     /// <summary>
     /// Date the employee started work in the department.
