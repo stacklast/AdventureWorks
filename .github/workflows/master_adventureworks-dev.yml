@@ -22,13 +22,14 @@ jobs:
           dotnet-version: '8.x'
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release
-      
+        run: dotnet build AdventureWorks.sln --configuration Release
+
       - name: Run Tests with dotnet
-        run: dotnet test --configuration Release --no-build
+        run: dotnet test AdventureWorks.sln --configuration Release --no-build
+        # Ensure that the test command is using the correct solution or project file
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
+        run: dotnet publish AdventureWorks.sln --configuration Release --output "${{env.DOTNET_ROOT}}/myapp"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -64,5 +65,4 @@ jobs:
         with:
           app-name: 'adventureworks-dev'
           slot-name: 'Production'
-          package: .
-          
+          package: ${{env.DOTNET_ROOT}}/myapp
