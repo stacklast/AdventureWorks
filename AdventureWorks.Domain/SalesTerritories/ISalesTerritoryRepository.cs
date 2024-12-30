@@ -12,4 +12,5 @@ public interface ISalesTerritoryRepository
     void Delete(Guid id);
 
     void AddHistory(SalesTerritoryHistory salesTerritoryHistory);
+    void DeleteHistoryByTerritoryId(int territoryId);
 }

@@ -1,5 +1,6 @@
 ﻿using AdventureWorks.Application.SalesTerritories.Create;
 using AdventureWorks.Application.SalesTerritories.GetById;
+using AdventureWorks.Application.SalesTerritories.Remove;
 using AdventureWorks.Application.SalesTerritories.Update;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -58,6 +59,25 @@ public class SalesTerritoriesController : ApiControllerBase
             request.SalesLastYear,
             request.CostYtd,
             request.CostLastYear,
+            request.Rowguid);
+
+        Shared.Result<Guid> result = await Mediator.Send(command, cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return BadRequest(result.Error);
+        }
+
+        return Ok(result.Value);
+    }
+
+    [AllowAnonymous]
+    [HttpDelete("delete")]
+    public async Task<IActionResult> Remove(
+        RemoveSalesTerritoryRequest request,
+        CancellationToken cancellationToken)
+    {
+        var command = new RemoveSalesTerritoryCommand(
             request.Rowguid);
 
         Shared.Result<Guid> result = await Mediator.Send(command, cancellationToken);

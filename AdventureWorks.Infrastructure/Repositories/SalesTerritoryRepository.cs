@@ -35,4 +35,16 @@ internal sealed class SalesTerritoryRepository(AdventureWorks2022Context dbConte
     {
         dbContext.Add(salesTerritoryHistory);
     }
+
+    public void DeleteHistoryByTerritoryId(int territoryId)
+    {
+        var records = dbContext.SalesTerritoryHistories
+            .Where(u => u.TerritoryId == territoryId)
+            .ToList();
+
+        if (records.Count > 0)
+        {
+            dbContext.RemoveRange(records);
+        }
+    }
 }

@@ -24,5 +24,12 @@ internal class SalesTerritoryCommandHandlerBase
         repository.AddHistory(salesTerritoryHistory);
         await unitOfWork.SaveChangesAsync(cancellationToken);
     }
+
+
+    protected async Task DeleteSalesTerritoryHistoryAsync(int territoryId, ISalesTerritoryRepository repository, IUnitOfWork unitOfWork, CancellationToken cancellationToken)
+    {
+        repository.DeleteHistoryByTerritoryId(territoryId);
+        await unitOfWork.SaveChangesAsync(cancellationToken);
+    }
 }
 
