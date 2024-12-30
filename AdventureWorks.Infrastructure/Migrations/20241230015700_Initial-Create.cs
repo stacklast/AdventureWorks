@@ -2,21 +2,20 @@
 
 #nullable disable
 
-namespace AdventureWorks.Infrastructure.Migrations
+namespace AdventureWorks.Infrastructure.Migrations;
+
+/// <inheritdoc />
+public partial class InitialCreate : Migration
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    protected override void Up(MigrationBuilder migrationBuilder)
     {
-        /// <inheritdoc />
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            //empty because DB already Exist
-        }
+        //empty because DB already Exist
+    }
 
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            //empty because DB already Exist
-        }
+    /// <inheritdoc />
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+        //empty because DB already Exist
     }
 }

@@ -5,8 +5,15 @@ using AdventureWorks.Domain.SalesTerritories;
 using AdventureWorks.Shared;
 
 namespace AdventureWorks.Application.SalesTerritories.Remove;
+
+public interface IRemoveSalesTerritoryCommandHandler
+    : ICommandHandler<RemoveSalesTerritoryCommand, Guid>
+{
+    new Task<Result<Guid>> Handle(RemoveSalesTerritoryCommand request, CancellationToken cancellationToken);
+}
+
 internal sealed class RemoveSalesTerritoryCommandHandler
-    : SalesTerritoryCommandHandlerBase, ICommandHandler<RemoveSalesTerritoryCommand, Guid>
+    : SalesTerritoryCommandHandlerBase, IRemoveSalesTerritoryCommandHandler, ICommandHandler<RemoveSalesTerritoryCommand, Guid>
 {
     private readonly ISalesTerritoryRepository _salesTerritoryRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -32,6 +39,6 @@ internal sealed class RemoveSalesTerritoryCommandHandler
 
         await DeleteSalesTerritoryHistoryAsync(salesTerritory.TerritoryId, _salesTerritoryRepository, _unitOfWork, cancellationToken);
 
-        return Result.Success(salesTerritory.Rowguid);
+        return Result.Success(request.Rowguid);
     }
 }

@@ -3,7 +3,7 @@ using AdventureWorks.Domain.Entities;
 using AdventureWorks.Domain.SalesTerritories;
 
 namespace AdventureWorks.Application.SalesTerritories;
-internal class SalesTerritoryCommandHandlerBase
+public class SalesTerritoryCommandHandlerBase
 {
     protected async Task InsertSalesTerritoryHistory(
         SalesTerritory salesTerritory,

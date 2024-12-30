@@ -5,8 +5,16 @@ using AdventureWorks.Domain.SalesTerritories;
 using AdventureWorks.Shared;
 
 namespace AdventureWorks.Application.SalesTerritories.Create;
+
+public interface ICreateSalesTerritoryCommandHandler
+    : ICommandHandler<CreateSalesTerritoryCommand, Guid>
+{
+    new Task<Result<Guid>> Handle(
+        CreateSalesTerritoryCommand request,
+        CancellationToken cancellationToken);
+}
 internal sealed class CreateSalesTerritoryCommandHandler
-    : SalesTerritoryCommandHandlerBase, ICommandHandler<CreateSalesTerritoryCommand, Guid>
+    : SalesTerritoryCommandHandlerBase, ICreateSalesTerritoryCommandHandler, ICommandHandler<CreateSalesTerritoryCommand, Guid>
 {
     private readonly ISalesTerritoryRepository _salesTerritoryRepository;
     private readonly IUnitOfWork _unitOfWork;
