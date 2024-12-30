@@ -2,6 +2,7 @@
 using AdventureWorks.Application.SalesTerritories.GetById;
 using AdventureWorks.Application.SalesTerritories.Remove;
 using AdventureWorks.Application.SalesTerritories.Update;
+using AdventureWorks.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +16,7 @@ public class SalesTerritoriesController : ApiControllerBase
     public async Task<IActionResult> GetSalesTerritories(int id, CancellationToken cancellationToken)
     {
         var query = new GetSalesTerritoryByIdQuery(id);
-        Shared.Result<SalesTerritoryResponse> result = await Mediator.Send(query, cancellationToken);
+        Result<SalesTerritoryResponse> result = await Mediator.Send(query, cancellationToken);
 
         return result.IsSuccess ? Ok(result.Value) : NotFound();
     }
@@ -35,7 +36,7 @@ public class SalesTerritoriesController : ApiControllerBase
             request.CostYtd,
             request.CostLastYear);
 
-        Shared.Result<Guid> result = await Mediator.Send(command, cancellationToken);
+        Result<Guid> result = await Mediator.Send(command, cancellationToken);
 
         if (result.IsFailure)
         {
@@ -61,7 +62,7 @@ public class SalesTerritoriesController : ApiControllerBase
             request.CostLastYear,
             request.Rowguid);
 
-        Shared.Result<Guid> result = await Mediator.Send(command, cancellationToken);
+        Result<Guid> result = await Mediator.Send(command, cancellationToken);
 
         if (result.IsFailure)
         {
@@ -80,7 +81,7 @@ public class SalesTerritoriesController : ApiControllerBase
         var command = new RemoveSalesTerritoryCommand(
             request.Rowguid);
 
-        Shared.Result<Guid> result = await Mediator.Send(command, cancellationToken);
+        Result<Guid> result = await Mediator.Send(command, cancellationToken);
 
         if (result.IsFailure)
         {
