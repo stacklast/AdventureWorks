@@ -1,6 +1,8 @@
 ﻿using AdventureWorks.Application.Abstractions.Data;
+using AdventureWorks.Domain.SalesTerritories;
 using AdventureWorks.Infrastructure.Persistence;
 using AdventureWorks.Infrastructure.Persistence.DbContexts;
+using AdventureWorks.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +25,9 @@ public static class DependencyInjection
         services.AddDbContext<AdventureWorks2022Context>(options =>
             options.UseSqlServer(connectionString));
 
+        services.AddScoped<ISalesTerritoryRepository, SalesTerritoryRepository>();
+
+        services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<AdventureWorks2022Context>());
 
         return services;
     }

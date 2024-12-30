@@ -1,6 +1,6 @@
 ﻿using AdventureWorks.Shared;
 
-namespace AdventureWorks.Domain.SalesTerritory;
+namespace AdventureWorks.Domain.SalesTerritories;
 public static class SalesTerritoryErrors
 {
     public static Error NotFound(int territoryId) => Error.NotFound(

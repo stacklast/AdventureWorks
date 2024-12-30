@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using AdventureWorks.Application.Abstractions.Data;
 using AdventureWorks.Application.Abstractions.Messaging;
-using AdventureWorks.Domain.SalesTerritory;
+using AdventureWorks.Domain.SalesTerritories;
 using AdventureWorks.Shared;
 using Dapper;
 

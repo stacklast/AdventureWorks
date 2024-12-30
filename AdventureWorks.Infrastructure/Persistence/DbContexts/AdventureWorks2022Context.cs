@@ -1,17 +1,23 @@
-﻿using AdventureWorks.Domain.Entities;
+﻿using System.Data;
+using AdventureWorks.Application.Abstractions.Data;
+using AdventureWorks.Domain.Entities;
+using AdventureWorks.Shared;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace AdventureWorks.Infrastructure.Persistence.DbContexts;
 
-public partial class AdventureWorks2022Context : DbContext
+public partial class AdventureWorks2022Context : DbContext, IUnitOfWork
 {
+    private readonly IPublisher _publisher;
     public AdventureWorks2022Context()
     {
     }
 
-    public AdventureWorks2022Context(DbContextOptions<AdventureWorks2022Context> options)
+    public AdventureWorks2022Context(DbContextOptions<AdventureWorks2022Context> options, IPublisher publisher)
         : base(options)
     {
+        _publisher = publisher;
     }
 
     public virtual DbSet<Address> Addresses { get; set; }
@@ -3247,4 +3253,41 @@ public partial class AdventureWorks2022Context : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            int result = await base.SaveChangesAsync(cancellationToken);
+
+            await PublishDomainEventsAsync();
+
+            return result;
+        }
+        catch (DbUpdateConcurrencyException ex)
+        {
+            throw new DBConcurrencyException("Concurrency exception occurred.", ex);
+        }
+    }
+
+    private async Task PublishDomainEventsAsync()
+    {
+        var domainEvents = ChangeTracker
+            .Entries<Entity>()
+            .Select(entry => entry.Entity)
+            .SelectMany(entity =>
+            {
+                List<IDomainEvent> domainEvents = entity.DomainEvents;
+
+                entity.ClearDomainEvents();
+
+                return domainEvents;
+            })
+            .ToList();
+
+        foreach (IDomainEvent? domainEvent in domainEvents)
+        {
+            await _publisher.Publish(domainEvent);
+        }
+    }
 }
