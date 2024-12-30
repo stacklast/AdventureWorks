@@ -1,4 +1,5 @@
-﻿using AdventureWorks.Infrastructure.Persistence.DbContexts;
+﻿using AdventureWorks.API.Middleware;
+using AdventureWorks.Infrastructure.Persistence.DbContexts;
 using Microsoft.EntityFrameworkCore;
 
 namespace AdventureWorks.API.Extensions;
@@ -11,5 +12,10 @@ public static class ApplicationBuilderExtensions
         using AdventureWorks2022Context dbContext = scope.ServiceProvider.GetRequiredService<AdventureWorks2022Context>();
 
         dbContext.Database.Migrate();
+    }
+
+    public static void UseCustomExceptionHandler(this IApplicationBuilder app)
+    {
+        app.UseMiddleware<ExceptionHandlingMiddleware>();
     }
 }
