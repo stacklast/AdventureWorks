@@ -43,7 +43,7 @@ AdventureWorks.sln/
 │   │   └── Abstractions                    # Interface Segregation Pinciple
 │   │   └── DependencyInjection.cs          # DI Configuration / Mediatr
 │   │
-│   ├── AdventureWorks.Infrastructure/      # JSON data storage
+│   ├── AdventureWorks.Infrastructure/      # Infrastructure Layer
 │   │   └── Migrations                      # EF Core
 │   │   └── Persistence                     # DBContext
 │   │   └── Repositories                    # Repository Pattern
