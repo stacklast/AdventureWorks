@@ -3,6 +3,7 @@ public sealed class SalesOrderWithCustomerAddressResponse
 {
     public int SalesOrderID { get; init; }
     public DateTime OrderDate { get; init; }
+    public decimal SubTotal { get; init; }
     public decimal TotalDue { get; init; }
     public int CustomerID { get; init; }
     public string CustomerName { get; set; }

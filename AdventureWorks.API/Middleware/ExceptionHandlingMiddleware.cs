@@ -33,7 +33,7 @@ public class ExceptionHandlingMiddleware
                 Status = exceptionDetails.Status,
                 Type = exceptionDetails.Type,
                 Title = exceptionDetails.Title,
-                Detail = exceptionDetails.Detail,
+                Detail = exceptionDetails.Detail + " " + exception.Message,
             };
 
             if (exceptionDetails.Errors is not null)
