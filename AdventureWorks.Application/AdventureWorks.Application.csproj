@@ -17,5 +17,9 @@
     <ProjectReference Include="..\AdventureWorks.Domain\AdventureWorks.Domain.csproj" />
     <ProjectReference Include="..\AdventureWorks.Shared\AdventureWorks.Shared.csproj" />
   </ItemGroup>
+	
+  <ItemGroup>
+	<InternalsVisibleTo Include="AdventureWorks.Application.UnitTests" />
+  </ItemGroup>
 
 </Project>
